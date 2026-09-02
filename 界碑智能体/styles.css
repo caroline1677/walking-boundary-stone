@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=ZCOOL+XiaoWei&display=swap');
+
+:root {
+  --ink: #243b32;
+  --muted: #63766d;
+  --gold: #ae7624;
+  --red: #c94a3b;
+  --deep: #174b3a;
+  --panel: rgba(255, 250, 232, .86);
+  --line: rgba(55, 88, 71, .2);
+  font-family: "Noto Serif SC", "Songti SC", serif;
+  color: var(--ink);
+  background: #dff3e7;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+button, input { font: inherit; }
+button { color: inherit; }
+
+.app-shell { min-height: 100vh; overflow: hidden; }
+.topbar {
+  position: fixed; z-index: 20; inset: 0 0 auto; height: 78px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 4vw; border-bottom: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(6,18,14,.88), rgba(6,18,14,.18));
+  backdrop-filter: blur(12px);
+}
+.brand { color: inherit; text-decoration: none; display: flex; gap: 13px; align-items: center; }
+.brand-mark {
+  width: 42px; height: 42px; display: grid; place-items: center;
+  border: 1px solid var(--gold); color: var(--gold); border-radius: 50%;
+  font-family: "ZCOOL XiaoWei"; font-size: 22px;
+  box-shadow: inset 0 0 0 4px rgba(217,181,107,.08);
+}
+.brand b, .brand small { display: block; }
+.brand b { letter-spacing: .18em; font-size: 17px; }
+.brand small { margin-top: 3px; color: #adb8ad; font-size: 10px; letter-spacing: .2em; }
+.top-actions { display: flex; align-items: center; gap: 16px; }
+.live-dot { font-size: 12px; letter-spacing: .12em; color: #d5dfd7; }
+.live-dot i { display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #79c695; box-shadow: 0 0 14px #79c695; }
+.icon-button { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,.05); cursor: pointer; }
+
+.hero {
+  position: relative; min-height: 100vh; padding: 110px 4vw 34px;
+  display: grid; grid-template-columns: minmax(240px, .85fr) minmax(380px, 1.35fr) minmax(290px, 1fr);
+  gap: clamp(22px, 3vw, 58px); align-items: stretch; isolation: isolate;
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background:
+    radial-gradient(circle at 52% 22%, rgba(255,222,91,.58), transparent 23%),
+    radial-gradient(circle at 8% 32%, rgba(94,196,158,.28), transparent 23%),
+    radial-gradient(circle at 91% 70%, rgba(224,89,63,.2), transparent 24%);
+}
+.backdrop {
+  position: absolute; inset: 0; z-index: -4;
+  background: linear-gradient(90deg, rgba(245,244,215,.91) 0%, rgba(231,247,226,.36) 46%, rgba(247,239,207,.85) 100%),
+    linear-gradient(0deg, rgba(217,237,218,.88), transparent 52%),
+    url("assets/友谊关关楼.jpg") center/cover;
+  transform: scale(1.03); filter: saturate(1.12) brightness(1.08);
+  transition: filter .8s ease, background-position 1.2s ease;
+}
+.grain { position: absolute; inset: 0; z-index: -2; opacity: .16; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E"); }
+
+.panel-kicker, .story-kicker { color: #a04a2e; font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; }
+.era-panel, .story-panel {
+  padding: 24px; border: 1px solid rgba(80,101,73,.18); border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255,253,239,.9), rgba(246,235,200,.72));
+  box-shadow: 0 24px 60px rgba(32,68,48,.16);
+  backdrop-filter: blur(12px);
+}
+@media (min-width: 1051px) {
+  .hero { grid-template-rows: auto; align-items: stretch; }
+  .era-panel, .story-panel { height: 100%; }
+  .monument-stage { height: auto; min-height: 650px; }
+  .monument-stage { display: grid; grid-template-rows: minmax(0, 1fr) auto; align-items: end; justify-items: center; }
+  .monument-stage .monument-wrap { align-self: center; }
+  .monument-stage .speech-card { align-self: end; margin-bottom: 0; }
+}
+.era-panel h1 { font-size: clamp(25px, 2vw, 37px); line-height: 1.48; margin: 14px 0 30px; letter-spacing: .06em; }
+.era-list { display: grid; gap: 7px; }
+.era-button {
+  position: relative; display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 12px;
+  width: 100%; padding: 13px 15px; text-align: left; cursor: pointer;
+  background: transparent; border: 1px solid transparent; border-radius: 4px;
+  transition: .3s ease;
+}
+.era-button::before { content: ""; position: absolute; left: 0; width: 2px; height: 0; background: var(--gold); transition: .3s; }
+.era-button:hover { background: rgba(255,255,255,.045); }
+.era-button.active { background: linear-gradient(90deg, rgba(183,142,75,.2), rgba(255,255,255,.02)); border-color: rgba(217,181,107,.2); }
+.era-button.active::before { height: 68%; }
+.era-button .num { color: #819088; font-size: 11px; letter-spacing: .12em; }
+.era-button b, .era-button small { display: block; }
+.era-button b { font-size: 15px; letter-spacing: .14em; }
+.era-button small { color: #708078; font-size: 10px; margin-top: 4px; }
+.era-button .glyph { font-size: 22px; color: #8f9a93; }
+.era-button.active .glyph { color: var(--gold); }
+.progress-card { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line); color: #6e7d74; font-size: 11px; letter-spacing: .12em; }
+.progress-card b { float: right; color: var(--gold); }
+.progress-card div { height: 2px; margin-top: 12px; background: rgba(255,255,255,.12); }
+.progress-card i { display: block; height: 100%; background: var(--gold); transition: width .5s ease; }
+
+.monument-stage { min-height: 650px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.era-ambient { position: absolute; width: 430px; height: 430px; border-radius: 50%; background: radial-gradient(circle, rgba(255,222,90,.52), rgba(120,205,162,.2) 44%, transparent 70%); filter: blur(6px); animation: breathe 4s ease-in-out infinite; }
+.monument-wrap { position: relative; width: 300px; height: 430px; display: grid; place-items: end center; perspective: 900px; }
+.monument-shadow { position: absolute; bottom: 2px; width: 250px; height: 48px; background: rgba(0,0,0,.6); filter: blur(17px); border-radius: 50%; }
+.monument {
+  --mark: #65402d;
+  position: relative; width: 245px; height: 400px; border-radius: 0;
+  background: url("assets/界碑写实.png") center bottom / contain no-repeat;
+  box-shadow: none;
+  transform: none; transition: .7s cubic-bezier(.22,.8,.25,1);
+  animation: monumentFloat 5s ease-in-out infinite;
+}
+.monument::after { display: none; }
+.monument-cap { display: none; }
+.monument-foot { display:none; }
+.seal { position: absolute; top: 52px; left: 50%; translate: -50%; width: 48px; height: 48px; border: 2px solid var(--mark); color: var(--mark); display: grid; place-items: center; border-radius: 50%; font-size: 23px; font-weight: 900; font-family: "ZCOOL XiaoWei"; }
+.inscription { position: absolute; top: 118px; width: 100%; text-align: center; color: var(--mark); text-shadow: 0 1px rgba(255,255,255,.8); }
+.inscription span {
+  display: block;
+  width: 1.25em;
+  height: auto;
+  margin: 0 auto;
+  font-size: 32px;
+  line-height: 1.12;
+  letter-spacing: .16em;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  white-space: nowrap;
+  overflow: visible;
+}
+.inscription em { display: block; margin-top: 13px; font-style: normal; font-size: 9px; letter-spacing: .25em; opacity: .75; }
+.face { position: absolute; inset: 0; }
+.eye { position: absolute; top: 228px; width: 11px; height: 6px; border-radius: 50%; background: #2b2520; box-shadow: 0 1px 0 2px rgba(255,255,255,.2); animation: blink 4.8s infinite; }
+.eye.left { left: 85px; } .eye.right { right: 85px; }
+.mouth { position: absolute; top: 260px; left: 50%; translate: -50%; width: 22px; height: 7px; border-bottom: 2px solid #342823; border-radius: 0 0 50% 50%; }
+.monument.speaking .mouth { background: #321c18; border: 1px solid rgba(0,0,0,.45); animation: talk .22s ease-in-out infinite alternate; }
+.era-badge { position: absolute; bottom: 15px; padding: 8px 15px; background: rgba(10,22,18,.75); border: 1px solid var(--line); backdrop-filter: blur(12px); font-size: 11px; letter-spacing: .18em; color: #ded1ad; }
+
+.monument.era-han .inscription span,
+.monument.era-han .seal {
+  font-family: "STLiti", "LiSu", "隶书", "KaiTi", serif;
+  font-weight: 700;
+}
+.monument.era-ming { --mark:#852923; filter: sepia(.16) saturate(.9); }
+.monument.era-ming .inscription span,
+.monument.era-ming .seal {
+  font-family: "STKaiti", "KaiTi", "楷体", "FangSong", serif;
+  font-weight: 700;
+}
+.monument.era-qing { --mark:#742b23; filter: sepia(.28) contrast(1.04); }
+.monument.era-qing .inscription span,
+.monument.era-qing .seal {
+  font-family: "FZBeiWeiKaiShu-S19S", "STKaiti", "KaiTi", "碑刻体", serif;
+  font-weight: 900;
+  text-shadow: 0 1px rgba(255,255,255,.75), 0 0 .6px currentColor;
+}
+.monument.era-modern { --mark:#d41919; filter: brightness(1.05); }
+.monument.era-modern .monument-cap { display: none; }
+.monument.era-modern .seal { display: none; }
+.monument.era-modern .inscription span {
+  font-family: "Microsoft YaHei", "SimHei", "黑体", sans-serif;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.speech-card { width: min(460px, 95%); margin-top: 4px; padding: 18px 22px; border: 1px solid rgba(94,91,52,.18); background: rgba(255,253,237,.9); backdrop-filter: blur(14px); border-radius: 14px; box-shadow: 0 18px 40px rgba(41,83,59,.18); }
+.speech-card > p { margin: 0; min-height: 52px; font-size: 14px; line-height: 1.8; color: #34483f; }
+.quote-mark { position: absolute; font-size: 56px; color: rgba(217,181,107,.22); translate: -8px -15px; }
+.speech-controls { display: flex; align-items: center; gap: 15px; margin-top: 14px; }
+.primary-button { border: 0; background: var(--red); padding: 10px 15px; border-radius: 3px; cursor: pointer; font-size: 12px; letter-spacing: .08em; }
+.primary-button i { display: inline-block; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 8px solid white; margin-right: 8px; }
+.primary-button.playing i { width: 8px; height: 10px; border: 0; border-left: 2px solid white; border-right: 2px solid white; }
+#speechStatus { color: #8e9a92; font-size: 10px; }
+.voice-chip { border: 1px solid rgba(73,99,82,.24); border-radius: 20px; background: #fffaf0; color: #4d6257; padding: 8px 10px; font-size: 10px; white-space: nowrap; }
+
+.story-panel {
+  padding: 26px 30px 28px;
+  overflow: hidden;
+}
+.year-mark { display: flex; align-items: baseline; gap: 8px; color: var(--gold); border-bottom: 1px solid var(--line); padding-bottom: 13px; margin-bottom: 24px; }
+.year-mark span { font-size: clamp(36px,4vw,65px); line-height: 1; font-family: "ZCOOL XiaoWei"; }
+.year-mark small { font-size: 10px; letter-spacing: .16em; }
+.story-panel h2 { margin: 13px 0 16px; font-size: clamp(25px,2.3vw,40px); line-height: 1.4; letter-spacing: .05em; }
+#storyBody { color: #566b61; font-size: 13px; line-height: 1.9; max-width: 480px; }
+.evidence-card { display: grid; grid-template-columns: 105px 1fr; gap: 14px; margin-top: 22px; padding: 9px; border: 1px solid var(--line); background: rgba(255,255,255,.48); border-radius:10px; }
+.evidence-card img { width: 105px; height: 70px; object-fit: cover; filter: sepia(.18) saturate(.85); }
+.evidence-card small { color: var(--gold); font-size: 9px; letter-spacing: .2em; }
+.evidence-card p { font-size: 11px; line-height: 1.65; margin: 6px 0 0; color: #53675d; }
+.question-card { margin-top: 22px; }
+.question-card label { display: block; color: var(--gold); font-size: 11px; letter-spacing: .18em; margin-bottom: 9px; }
+.question-card > div:first-of-type { display: flex; border-bottom: 1px solid #718079; }
+.question-card input { width: 100%; padding: 11px 0; color: #263d33; background: transparent; border: 0; outline: 0; font-size: 12px; }
+.question-card input::placeholder { color: #7e8a83; }
+.question-card button { width: 37px; border: 0; background: transparent; color: var(--gold); cursor: pointer; font-size: 19px; }
+.answer-card { margin-top: 14px; padding: 12px 14px; border: 1px solid rgba(94,91,52,.22); border-radius: 10px; background: rgba(255,253,237,.78); color: #34483f; }
+.answer-card { display: none; }
+.answer-card small { color: var(--gold); font-size: 11px; letter-spacing: .12em; }
+.answer-card p { margin: 7px 0 0; font-size: 13px; line-height: 1.8; white-space: pre-wrap; }
+.chat-history { box-sizing: border-box; width: 100%; max-height: 230px; overflow-y: auto; margin-top: 14px; padding: 10px; border: 1px solid rgba(94,91,52,.2); border-radius: 12px; background: rgba(255,253,237,.38); }
+.chat-history:empty { display: none; }
+.chat-message { max-width: 92%; margin: 8px 0; padding: 9px 11px; border-radius: 11px; font-size: 12px; line-height: 1.65; box-shadow: 0 2px 8px rgba(41,83,59,.06); }
+.chat-message.user { margin-left: auto; background: #718079; color: #fffdf0; border-bottom-right-radius: 3px; }
+.chat-message.assistant { margin-right: auto; background: rgba(255,253,237,.95); color: #34483f; border-bottom-left-radius: 3px; }
+.chat-message small { display: block; margin-bottom: 3px; color: var(--gold); font-size: 10px; }
+.agent-image, .agent-video { display: block; max-width: 100%; margin-top: 8px; border-radius: 8px; }
+.agent-media { display: block; margin-top: 8px; }
+.agent-media > a:first-child { display: block; cursor: zoom-in; }
+.agent-download { display: inline-block; margin-top: 5px; color: var(--deep); font-size: 11px; font-weight: 700; }
+.agent-audio { width: 100%; margin-top: 8px; }
+.agent-file { display: inline-block; margin-top: 8px; color: var(--deep); font-weight: 700; }
+.suggestions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; }
+.suggestions button { width: auto; padding: 5px 9px; border: 1px solid var(--line); border-radius: 20px; color: #50675b; background:rgba(255,255,255,.45); font-size: 9px; }
+.scroll-hint { position: absolute; bottom: 22px; left: 50%; translate: -50%; display: flex; align-items: center; gap: 9px; color: #839087; font-size: 9px; letter-spacing: .22em; }
+.scroll-hint i { width: 17px; height: 26px; border: 1px solid #65716a; border-radius: 10px; }
+.scroll-hint i::after { content:""; display:block; width:2px; height:6px; margin:5px auto; background:#c4a86f; animation:scroll 1.5s infinite; }
+
+@keyframes monumentFloat { 0%,100%{translate:0 0} 50%{translate:0 -7px} }
+@keyframes breathe { 50% { transform:scale(1.1); opacity:.72 } }
+@keyframes blink { 0%,43%,47%,100%{transform:scaleY(1)} 45%{transform:scaleY(.08)} }
+@keyframes talk { from{width:18px;height:5px} to{width:14px;height:13px;border-radius:50%} }
+@keyframes scroll { 0%{translate:0 0;opacity:0} 30%{opacity:1} 100%{translate:0 8px;opacity:0} }
+
+@media (max-width: 1050px) {
+  .hero { grid-template-columns: 220px 1fr; padding-top: 96px; }
+  .story-panel { grid-column: 1 / -1; display: grid; grid-template-columns: .75fr 1fr; gap: 12px 28px; padding: 24px 5vw 50px; background: rgba(255,250,230,.9); }
+  .story-panel .year-mark { grid-row: span 2; align-self: start; }
+  .story-panel .evidence-card, .story-panel .question-card { grid-column: 2; }
+  .scroll-hint { display: none; }
+}
+@media (max-width: 700px) {
+  .topbar { height: 68px; padding: 0 18px; }
+  .brand small, .live-dot { display:none; }
+  .hero { display: flex; flex-direction: column; padding: 86px 18px 30px; gap: 10px; }
+  .backdrop { background-position: 58% center; }
+  .era-panel { width: 100%; }
+  .era-panel h1, .progress-card { display: none; }
+  .era-list { display: flex; overflow-x: auto; gap: 7px; padding-bottom: 4px; scrollbar-width: none; }
+  .era-button { flex: 0 0 142px; grid-template-columns: 24px 1fr; padding: 10px; background: rgba(255,252,235,.82); border-color: var(--line); }
+  .era-button .glyph { display: none; }
+  .monument-stage { min-height: 570px; width: 100%; }
+  .monument-wrap { transform: scale(.88); margin: -20px 0 -24px; }
+  .story-panel { display:block; width: calc(100% + 36px); padding: 28px 20px 50px; margin: 0 -18px -30px; }
+  .year-mark span { font-size: 48px; }
+  .story-panel h2 { font-size: 29px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+/* Shared-site entry to the immersive world */
+.world-entry {
+  position: fixed;
+  z-index: 40;
+  top: 84px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(215, 177, 112, .5);
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(12, 32, 26, .78);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .18);
+  backdrop-filter: blur(12px);
+  text-decoration: none;
+  font-size: 12px;
+}
+.world-entry span {
+  padding: 3px 6px;
+  border-radius: 999px;
+  color: #22190c;
+  background: #d7b170;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+.world-entry i { font-style: normal; font-size: 18px; transition: transform .2s ease; }
+.world-entry:hover i { transform: translateX(4px); }
+@media (max-width: 720px) {
+  .world-entry { top: 70px; right: 12px; }
+  .world-entry b { display: none; }
+}
+
+#micButton { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.12); color: inherit; font-size: 17px; cursor: pointer; }
+#micButton.listening { background: #e05548; box-shadow: 0 0 0 6px rgba(224, 85, 72, 0.25); }
+#micButton[hidden] { display: none; }
+
+/* 对齐“听界碑讲述 / Fish Audio 音色 / 状态”三个控件：统一 42px 高，底边对齐 */
+.speech-controls { align-items: center; }
+#speakButton { height: 42px; display: inline-flex; align-items: center; padding: 0 16px; }
+.voice-chip { height: 42px; display: inline-flex; align-items: center; padding: 0 13px; }
+#speechStatus { display: inline-flex; align-items: center; height: 42px; }
+
+/* 顶栏 3D 漫游 / 实景VR 入口（象牙白胶囊 + 图标区分） */
+.world-link, .vr-link {
+  width: auto; height: 38px; padding: 0 18px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255, 252, 243, 0.94);
+  color: #25362e; border: 1px solid rgba(38, 59, 51, 0.2);
+  font-size: 13px; font-weight: 700; letter-spacing: .12em;
+  text-decoration: none; white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(30, 40, 30, 0.22);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.world-link::before { content: "⟡"; font-size: 15px; color: #a94b3f; }
+.vr-link::before { content: "◍"; font-size: 15px; color: #3f6b52; }
+.world-link:hover, .vr-link:hover { transform: translateY(-1px); background: #fffdf8; box-shadow: 0 10px 26px rgba(30, 40, 30, 0.32); }
+.world-link:active, .vr-link:active { transform: translateY(0); }

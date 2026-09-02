@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "updatedAt": "2026-08-31T01:00:00+08:00",
+  "provenance": "tools/build_post.py 设计态高度场 + BFS 校验（POST_QUEST 全 OK），碰撞体同源",
+  "points": {
+    "spawn": { "x": 0.0, "y": 0.0, "z": 13.0 },
+    "back": { "x": 2.5, "y": 0.0, "z": 14.0 }
+  },
+  "discoveries": [
+    { "id": "d_binoc", "position": { "x": 5.6, "y": 1.0, "z": -0.6 } },
+    { "id": "d_radio", "position": { "x": 2.2, "y": 0.62, "z": 3.2 } },
+    { "id": "d_flask", "position": { "x": 1.35, "y": 0.1, "z": 4.35 } },
+    { "id": "d_crates", "position": { "x": 6.3, "y": 0.6, "z": 1.2 } },
+    { "id": "d_sign", "position": { "x": 4.5, "y": 0.1, "z": 5.5 } },
+    { "id": "d_stone", "position": { "x": -7.0, "y": 0.4, "z": 3.0 } },
+    { "id": "back", "position": { "x": 2.5, "y": 0.05, "z": 14.0 } }
+  ]
+}

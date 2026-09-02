@@ -1,0 +1,17 @@
+# 构建上下文只保留运行必需文件
+venv/
+.venv/
+__pycache__/
+**/__pycache__/
+tools/
+assets/audio/cache/
+.env
+.env.*
+!.env.example
+tests/
+docs/
+*.ps1
+tts_req*.json
+Dockerfile
+compose.yaml
+.dockerignore

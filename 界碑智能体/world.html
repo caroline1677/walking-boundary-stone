@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>友谊关研学探索｜真实世界</title>
+  <link rel="stylesheet" href="world.css?v=20260901-dvh1">
+  <script>
+    (function () {
+      function report(payload) {
+        try {
+          var body = JSON.stringify(payload);
+          if (navigator.sendBeacon) navigator.sendBeacon("/api/client-log", new Blob([body], { type: "application/json" }));
+          else fetch("/api/client-log", { method: "POST", body: body, keepalive: true });
+        } catch (err) { /* 上报失败保持静默 */ }
+      }
+      window.addEventListener("error", function (event) {
+        report({ type: "error", message: String(event.message || (event.error && event.error.message) || event), source: event.filename || "", line: event.lineno || 0, page: location.href, ua: navigator.userAgent });
+      });
+      window.addEventListener("unhandledrejection", function (event) {
+        report({ type: "promise", message: String((event.reason && event.reason.message) || event.reason), page: location.href, ua: navigator.userAgent });
+      });
+    })();
+  </script>
+</head>
+<body>
+  <main id="game" class="game-shell">
+    <canvas id="three-canvas" aria-label="友谊关 3D 研学场景"></canvas>
+    <header class="topbar">
+      <a href="index.html" class="brand"><span>关</span><span><b>友谊关 · 研学探索</b><small>寻找关隘选址的三个秘密</small></span></a>
+      <a id="dialogue-link" class="ghost-button" href="index.html">行走的界碑</a>
+      <button id="night-button" class="ghost-button" type="button" hidden>夜巡模式</button>
+      <button id="scene-button" class="ghost-button" type="button">边境哨所</button>
+      <button id="help-button" class="ghost-button" type="button">操作说明</button>
+    </header>
+    <section class="hud" aria-live="polite">
+      <aside id="quest-panel" class="card quest-panel"></aside>
+      <div id="interaction-tip" class="interaction-tip" hidden></div>
+      <div id="toast" class="toast" hidden></div>
+      <button class="corner-button map-button" type="button" title="小地图将在后续开放">地图</button>
+      <button class="corner-button handbook-button" type="button" title="研学手册">手册</button>
+    </section>
+    <section id="intro-panel" class="modal card intro-panel" hidden>
+      <span class="eyebrow">友谊关研学探索</span>
+      <h1>今天的问题</h1>
+      <blockquote>“为什么这里会建一座关？”</blockquote>
+      <p>眼前就是友谊关。沿着这条路往前走，先找到守在关前的界碑爷爷，听听他想请你查清什么。</p>
+      <button class="primary" data-start type="button">开始探索</button>
+    </section>
+    <section id="overlay-panel" class="modal card" hidden></section>
+    <section id="help-card" class="modal card" hidden>
+      <button class="modal-close" data-close-help type="button">×</button>
+      <span class="eyebrow">探索方式</span>
+      <h2>在真实世界里寻找证据</h2>
+      <p>WASD / 方向键移动，拖动鼠标旋转相机，滚轮调整距离，Shift 加速，靠近地点后按 E 互动，ESC 关闭界面。</p>
+      <button class="primary" data-close-help type="button">知道了</button>
+    </section>
+    <aside id="debug-panel" class="debug-panel" hidden>
+      <strong>Debug Mode</strong>
+      <span data-debug-position>XYZ 0 / 0 / 0</span><span data-debug-fps>0 FPS</span>
+      <label><input type="checkbox" data-debug-collider> Collider</label>
+      <label><input type="checkbox" data-debug-points checked> Points</label>
+      <select data-debug-target>
+        <option value="spawn">出生点</option><option value="grandpa">界碑爷爷</option>
+        <option value="gate">关楼点</option><option value="boundary">界碑点</option><option value="terrain">地形点</option>
+      </select>
+      <button type="button" data-debug-teleport>跳转到标定点</button>
+      <button type="button" data-debug-record>记录当前位置</button>
+      <div class="debug-layout-actions">
+        <button type="button" data-set-layout="spawn">设为出生点</button>
+        <button type="button" data-set-layout="grandpa">设为NPC点</button>
+        <button type="button" data-set-layout="gate">设为关楼点</button>
+        <button type="button" data-set-layout="boundary">设为界碑点</button>
+        <button type="button" data-set-layout="terrain">设为地形点</button>
+        <button type="button" data-add-discovery>新增自由发现</button>
+      </div>
+      <code data-debug-last>尚未记录</code>
+    </aside>
+    <div id="loading-screen" class="loading-screen">
+      <div class="loader-mark">关</div>
+      <p id="loading-text">正在连接友谊关真实世界…</p>
+      <div class="loading-track"><span id="loading-bar"></span></div>
+    </div>
+    <div id="minimap-panel" class="minimap-panel" hidden>
+      <canvas id="minimap-canvas" width="280" height="280"></canvas>
+    </div>
+    <div class="controls-hint">WASD 移动 · 鼠标转动视角 · E 互动</div>
+  </main>
+  <script type="importmap">
+    {"imports":{
+      "three":"/js/lib/three180/three.module.js",
+      "three/addons/":"/js/lib/three180/addons/",
+      "@sparkjsdev/spark":"/js/lib/spark210/spark.module.js",
+      "three-mesh-bvh":"/js/lib/bvh014/index.module.js"
+    }}
+  </script>
+  <script src="js/touch-controls.js?v=t1"></script>
+  <script src="js/speech-input.js?v=s1"></script>
+  <script type="module" src="js/world.js?v=hb4"></script>
+</body>
+</html>

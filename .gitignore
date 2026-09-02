@@ -1,0 +1,35 @@
+# ===== 密钥与连接信息（严禁提交）=====
+/server-connection.env
+界碑智能体/.env
+界碑智能体/.env.*
+!界碑智能体/.env.example
+界碑智能体/qch-env
+
+# ===== Python 运行产物 =====
+__pycache__/
+*.pyc
+.venv/
+界碑智能体/.venv/
+.uv-cache/
+
+# ===== 本地工具与内部工作目录 =====
+.tools/
+.memorax-code/
+.docx_qa/
+# 内部交接与排查记录，仅本地保留
+/界碑智能体-HANDOFF.md
+
+# ===== 可重新下载的本地模型权重（约 540MB，不入库）=====
+界碑智能体/tools/whisper-model/
+界碑智能体/tools/whisper-model-small/
+
+# ===== 个人材料（涉及个人隐私，不入库）=====
+新建文件夹/
+新建文件夹.zip
+
+# ===== 重复的大型压缩包（目录已入库）=====
+界碑智能体-展示包.zip
+
+# ===== 系统杂项 =====
+Thumbs.db
+.DS_Store

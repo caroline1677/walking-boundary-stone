@@ -1,0 +1,19 @@
+{
+  "version": 8,
+  "updatedAt": "2026-08-30T22:35:00+08:00",
+  "provenance": "v2 设计态世界（tools/build_world_v2.py）：高度场为设计值，BFS 可达性校验全部任务点 OK，碰撞体 pass-v2-collider.glb 与地形同源导出；取代 v7 扫描走廊坐标系",
+  "points": {
+    "spawn": { "x": 0.0, "y": -1.36, "z": 44.0 },
+    "grandpa": { "x": 3.0, "y": -0.9, "z": 30.0, "rotationY": -0.25 },
+    "gate": { "x": 0.0, "y": 0.0, "z": 6.0 },
+    "boundary": { "x": 10.5, "y": 0.0, "z": 14.0 },
+    "terrain": { "x": 12.6, "y": 8.18, "z": -3.0 }
+  },
+  "discoveries": [
+    { "id": "road", "position": { "x": 0.0, "y": 0.0, "z": 21.0 } },
+    { "id": "steps", "position": { "x": 11.6, "y": 2.86, "z": 3.4 } },
+    { "id": "wall", "position": { "x": 14.6, "y": 8.92, "z": -5.4 } },
+    { "id": "sign", "position": { "x": -6.0, "y": 0.0, "z": 5.6 } },
+    { "id": "view", "position": { "x": -14.4, "y": 8.64, "z": -4.8 } }
+  ]
+}

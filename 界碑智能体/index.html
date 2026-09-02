@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#14251f">
+  <title>行走的界碑｜友谊关研学智能体</title>
+  <link rel="stylesheet" href="styles.css?v=20260901-ui1">
+  <script>
+    (function () {
+      function report(payload) {
+        try {
+          var body = JSON.stringify(payload);
+          if (navigator.sendBeacon) navigator.sendBeacon("/api/client-log", new Blob([body], { type: "application/json" }));
+          else fetch("/api/client-log", { method: "POST", body: body, keepalive: true });
+        } catch (err) { /* 上报失败保持静默 */ }
+      }
+      window.addEventListener("error", function (event) {
+        report({ type: "error", message: String(event.message || (event.error && event.error.message) || event), source: event.filename || "", line: event.lineno || 0, page: location.href, ua: navigator.userAgent });
+      });
+      window.addEventListener("unhandledrejection", function (event) {
+        report({ type: "promise", message: String((event.reason && event.reason.message) || event.reason), page: location.href, ua: navigator.userAgent });
+      });
+    })();
+  </script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="返回首页">
+        <span class="brand-mark">关</span>
+        <span><b>行走的界碑</b><small>友谊关 · 边关研学智能体</small></span>
+      </a>
+      <div class="top-actions">
+        <span class="live-dot"><i></i> AI 讲解中</span>
+        <a class="icon-button world-link" href="world.html" aria-label="进入 3D 边关漫游" title="进入 3D 边关漫游">3D 漫游</a>
+        <a class="vr-link" href="https://www.720yun.com/vr/fa5jtzhurm7?s=26781916" target="_blank" rel="noopener" aria-label="打开友谊关景区实景VR全景" title="友谊关景区实景VR全景">实景VR</a>
+        <button class="icon-button" id="soundToggle" aria-label="切换声音">声</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="backdrop" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <aside class="era-panel" aria-label="选择历史时期">
+        <p class="panel-kicker">穿越两千年</p>
+        <h1>选择一个时代<br>听我亲历的故事</h1>
+        <nav class="era-list" id="eraList"></nav>
+        <div class="progress-card">
+          <span>研学进度</span><b id="progressText">1 / 4</b>
+          <div><i id="progressBar"></i></div>
+        </div>
+      </aside>
+
+      <section class="monument-stage" aria-label="会说话的界碑">
+        <div class="era-ambient" id="eraAmbient"></div>
+        <div class="monument-wrap">
+          <div class="monument-shadow"></div>
+          <div class="monument era-han" id="monument">
+            <div class="monument-cap"></div>
+            <div class="seal" id="seal">汉</div>
+            <div class="inscription">
+              <span id="inscriptionTop">雍鸡关</span>
+              <em id="inscriptionBottom">南疆古道</em>
+            </div>
+            <div class="face" aria-hidden="true">
+              <i class="eye left"></i><i class="eye right"></i>
+              <i class="mouth"></i>
+            </div>
+            <div class="monument-foot"></div>
+          </div>
+          <div class="era-badge" id="eraBadge">汉 · 元鼎六年</div>
+        </div>
+        <div class="speech-card">
+          <span class="quote-mark">“</span>
+          <p id="speechText"></p>
+          <div class="speech-controls">
+            <button class="primary-button" id="speakButton"><i></i><span>听界碑讲述</span></button>
+            <span class="voice-chip">Fish Audio · 老者</span>
+            <span id="speechStatus">点击播放 · 约 20 秒</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="story-panel">
+        <div class="year-mark"><span id="year">前 111</span><small id="yearUnit">公元</small></div>
+        <p class="story-kicker" id="storyKicker">岭南初定 · 关隘初现</p>
+        <h2 id="storyTitle">我最早的名字，<br>叫作雍鸡关。</h2>
+        <p id="storyBody"></p>
+        <div class="evidence-card">
+          <img id="evidenceImage" src="assets/友谊关关楼.jpg" alt="友谊关史料照片">
+          <div><small>研学手记</small><p id="evidenceCaption"></p></div>
+        </div>
+        <div class="question-card">
+          <label for="questionInput">问问界碑</label>
+          <div>
+            <input id="questionInput" placeholder="例如：你为什么改过这么多名字？">
+            <button id="micButton" aria-label="点击说话提问" type="button">🎤</button>
+            <button id="askButton" aria-label="发送问题">↑</button>
+          </div>
+          <div class="suggestions" id="suggestions"></div>
+          <div class="answer-card" id="answerCard" hidden>
+            <small>界碑回答</small>
+            <p id="answerText"></p>
+          </div>
+          <div class="chat-history" id="chatHistory" aria-live="polite"></div>
+        </div>
+      </aside>
+
+      <div class="scroll-hint"><i></i><span>选择朝代，开启讲述</span></div>
+    </section>
+  </main>
+  <script src="js/speech-input.js?v=s1"></script>
+  <script src="app.js?v=mic4"></script>
+</body>
+</html>

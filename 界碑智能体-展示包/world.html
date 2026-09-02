@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>友谊关研学｜Three.js 灰盒 MVP</title>
+  <link rel="stylesheet" href="world.css">
+</head>
+<body>
+  <main id="game" class="game-shell">
+    <canvas id="three-canvas" aria-label="友谊关 3D 研学场景"></canvas>
+    <header class="topbar">
+      <a href="index.html" class="brand"><span>关</span><b>友谊关研学</b><small>Three.js 灰盒体验</small></a>
+      <div class="scene-tabs" role="tablist">
+        <button class="active" data-scene="friendship-pass">友谊关</button>
+        <button data-scene="frontier-post">边境哨所</button>
+      </div>
+      <button id="help-button" class="ghost-button">操作说明</button>
+    </header>
+    <section class="hud" aria-live="polite">
+      <div class="scene-heading"><span id="scene-eyebrow">01 · 国门之下</span><h1 id="scene-title">友谊关</h1><p id="scene-description">沿着石板路探索边关，找到界碑爷爷。</p></div>
+      <aside id="quest-panel" class="card quest-panel"></aside>
+      <div id="interaction-tip" class="interaction-tip" hidden></div>
+      <div id="toast" class="toast" hidden></div>
+    </section>
+    <div id="dialog-panel" class="modal card" hidden></div>
+    <div id="knowledge-card" class="modal card" hidden></div>
+    <div id="help-card" class="modal card" hidden>
+      <button class="modal-close" data-close="help-card">×</button><span class="eyebrow">探索方式</span>
+      <h2>走进会回应你的边关</h2>
+      <p>W/A/S/D 或方向键移动小女孩；靠近人物和地点后按 E 互动。你可以先自由探索，再决定是否接受任务。</p>
+      <button class="primary" data-close="help-card">知道了</button>
+    </div>
+    <div id="loading-screen" class="loading-screen"><div class="loader"></div><p>正在搭建友谊关灰盒场景…</p></div>
+    <div class="controls-hint">WASD 移动 · E 互动 · 可自由探索</div>
+  </main>
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+  <script type="module" src="world.js"></script>
+</body>
+</html>
